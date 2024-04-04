@@ -57,19 +57,8 @@ class MovieRepositoryImpl @Inject constructor(
         coroutineScope.launch {
             client.getMovies().zip(client.getStaffPicks()) { movieListReponse, staffPicksResponse ->
                 movieListReponse.map { movieResponse ->
-                    Movie(
-                        id = movieResponse.id,
-                        rating = movieResponse.rating,
-                        releaseDate = movieResponse.releaseDate,
-                        posterUrl = movieResponse.posterUrl,
-                        runtime = movieResponse.runtime,
-                        overview = movieResponse.overview,
-                        budget = movieResponse.budget,
-                        language = movieResponse.language,
-                        genres = movieResponse.genres,
-                        isFavourite = false,
-                        isStaffPick = staffPicksResponse.firstOrNull { it.id == movieResponse.id } != null
-                    )
+                    movieResponse.isStaffPick = staffPicksResponse.firstOrNull { it.id == movieResponse.id } != null
+                    movieResponse
                 }
             }.catch {
                 Log.i("Repository Error: ", it.message.toString())
@@ -78,7 +67,4 @@ class MovieRepositoryImpl @Inject constructor(
             }
         }
     }
-
-
-
 }

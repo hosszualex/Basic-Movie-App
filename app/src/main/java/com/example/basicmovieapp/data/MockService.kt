@@ -1,8 +1,7 @@
 package com.example.basicmovieapp.data
 
 import android.content.Context
-import com.example.basicmovieapp.data.models.MovieResponse
-import com.example.basicmovieapp.domain.util.GsonUtil
+import com.example.basicmovieapp.domain.models.Movie
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -14,15 +13,15 @@ import javax.inject.Inject
 class MockService @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    suspend fun getMovies(): Flow<List<MovieResponse>> = flow {
+    suspend fun getMovies(): Flow<List<Movie>> = flow {
         val jsonString = context.assets.open("movies.json").bufferedReader().use { it.readText() }
-        val response: List<MovieResponse> = Gson().fromJson(jsonString, object : TypeToken<List<MovieResponse?>?>() {}.type)
+        val response: List<Movie> = Gson().fromJson(jsonString, object : TypeToken<List<Movie?>?>() {}.type)
         emit(response)
     }
 
-    fun getStaffPicks(): Flow<List<MovieResponse>> = flow {
+    fun getStaffPicks(): Flow<List<Movie>> = flow {
         val jsonString = context.assets.open("staff_picks.json").bufferedReader().use { it.readText() }
-        val response: List<MovieResponse> = Gson().fromJson(jsonString, object : TypeToken<List<MovieResponse?>?>() {}.type)
+        val response: List<Movie> = Gson().fromJson(jsonString, object : TypeToken<List<Movie?>?>() {}.type)
         emit(response)
     }
 }
