@@ -50,8 +50,15 @@ class HomeFragment: Fragment(), IOnMovieClickListener {
 
     private fun connectViewModel() {
         lifecycleScope.launch {
-            viewModel.favoriteMovies.collect {
-                favoritesAdapter.refreshData(it)
+            viewModel.favoriteMovies.collect { favoriteMovies ->
+                favoritesAdapter.refreshData(favoriteMovies)
+                if (favoriteMovies.isEmpty()) {
+                    binding.textViewFavoritesHeader.visibility = View.GONE
+                    binding.recyclerViewFavorites.visibility = View.GONE
+                } else {
+                    binding.textViewFavoritesHeader.visibility = View.VISIBLE
+                    binding.recyclerViewFavorites.visibility = View.VISIBLE
+                }
             }
         }
         lifecycleScope.launch {

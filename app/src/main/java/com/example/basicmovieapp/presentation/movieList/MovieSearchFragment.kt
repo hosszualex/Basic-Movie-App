@@ -48,6 +48,7 @@ class MovieSearchFragment: Fragment(), IOnMovieClickListener {
         moviesAdapter = MovieListAdapter(this)
         binding.recyclerViewMovies.adapter = moviesAdapter
         binding.searchViewMovies.setOnQueryTextListener(movieSearchQueryListener)
+        binding.imageButtonBack.setOnClickListener { findNavController().popBackStack() }
         connectViewModel()
     }
 

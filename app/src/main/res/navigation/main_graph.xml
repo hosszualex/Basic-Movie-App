@@ -34,5 +34,10 @@
 
     <action
         android:id="@+id/navigateToMovieDetails"
-        app:destination="@id/fragmentMovieDetails" />
+        app:destination="@id/fragmentMovieDetails"
+        app:enterAnim="@anim/left_to_right_start"
+        app:exitAnim="@anim/left_to_right_end"
+        app:popEnterAnim="@anim/right_to_left_start"
+        app:popExitAnim="@anim/right_to_left_end" />
+
 </navigation>
