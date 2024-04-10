@@ -1,0 +1,10 @@
+package com.example.basicmovieapp.data
+
+import com.example.basicmovieapp.domain.models.Movie
+import kotlinx.coroutines.flow.Flow
+
+interface DataClient {
+    fun getMovies(): Flow<List<Movie>>
+
+    fun getStaffPicks(): Flow<List<Movie>>
+}

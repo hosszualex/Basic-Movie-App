@@ -9,14 +9,30 @@
         android:id="@+id/fragmentHome"
         android:name="com.example.basicmovieapp.presentation.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/navigateToSearch"
+            app:destination="@id/fragmentMovieSearch"
+            app:enterAnim="@anim/left_to_right_start"
+            app:exitAnim="@anim/left_to_right_end"
+            app:popEnterAnim="@anim/right_to_left_start"
+            app:popExitAnim="@anim/right_to_left_end" />
+    </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/fragmentMovieSearch"-->
-<!--        android:label="MovieSearch" />-->
+    <fragment
+        android:id="@+id/fragmentMovieSearch"
+        android:name="com.example.basicmovieapp.presentation.movieList.MovieSearchFragment"
+        android:label="MovieSearch"
+        tools:layout="@layout/fragment_movie_search"/>
 
-<!--    <fragment-->
-<!--        android:id="@+id/fragmentMovieDetails"-->
-<!--        android:label="MovieDetails" />-->
+    <fragment
+        android:id="@+id/fragmentMovieDetails"
+        android:name="com.example.basicmovieapp.presentation.movieDetails.MovieDetailsFragment"
+        android:label="MovieDetails"
+        tools:layout="@layout/fragment_movie_details"
+        />
 
+    <action
+        android:id="@+id/navigateToMovieDetails"
+        app:destination="@id/fragmentMovieDetails" />
 </navigation>

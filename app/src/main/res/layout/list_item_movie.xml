@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="18dp"
+    android:layout_marginVertical="16dp"
+    tools:context=".presentation.MainActivity">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewContainer"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:background="@android:color/transparent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_launcher_background"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/containerInformation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardViewContainer"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonFavoriteIcon"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewReleaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2008"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewMovieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            tools:text="The Dark Knight"
+            />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/ratingBarMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleSmall"
+            android:progressTint="@color/gold"
+            android:numStars="5"
+            android:stepSize="0.1"
+            android:isIndicator="true"
+            tools:rating="3"
+            />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonFavoriteIcon"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:scaleType="fitXY"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@android:color/white"
+        android:src="@drawable/selector_favorite"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

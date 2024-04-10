@@ -10,16 +10,16 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 
-class MockService @Inject constructor(
+class OfflineDataClient @Inject constructor(
     @ApplicationContext private val context: Context
-) {
-    suspend fun getMovies(): Flow<List<Movie>> = flow {
+): DataClient {
+    override fun getMovies(): Flow<List<Movie>> = flow {
         val jsonString = context.assets.open("movies.json").bufferedReader().use { it.readText() }
         val response: List<Movie> = Gson().fromJson(jsonString, object : TypeToken<List<Movie?>?>() {}.type)
         emit(response)
     }
 
-    fun getStaffPicks(): Flow<List<Movie>> = flow {
+    override fun getStaffPicks(): Flow<List<Movie>> = flow {
         val jsonString = context.assets.open("staff_picks.json").bufferedReader().use { it.readText() }
         val response: List<Movie> = Gson().fromJson(jsonString, object : TypeToken<List<Movie?>?>() {}.type)
         emit(response)

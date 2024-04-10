@@ -2,6 +2,7 @@ package com.example.basicmovieapp.domain.models
 
 data class Movie (
     val id: Int,
+    val title: String,
     val rating: Double,
     val releaseDate: String,
     val posterUrl: String,

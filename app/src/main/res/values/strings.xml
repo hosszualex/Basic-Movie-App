@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Basic Movie App</string>
+
+    <string name="staff_picks_header">OUR <b>STAFF PICKS</b></string>
+    <string name="favorite_header">YOUR <b>FAVORITES</b></string>
+
 </resources>

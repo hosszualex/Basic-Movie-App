@@ -1,10 +1,8 @@
 package com.example.basicmovieapp.domain.di
 
 import android.content.Context
-import com.example.basicmovieapp.data.MockService
-import com.example.basicmovieapp.domain.repositories.MovieRepositoryImpl
-import com.example.basicmovieapp.domain.util.GsonUtil
-import com.google.gson.Gson
+import com.example.basicmovieapp.data.DataClient
+import com.example.basicmovieapp.data.OfflineDataClient
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -21,8 +19,9 @@ object ProvidesModule {
     @Singleton
     fun providesMockService(
         @ApplicationContext context: Context,
-    ): MockService = MockService(context)
+    ): DataClient = OfflineDataClient(context)
 
     @Provides
     fun providesCoroutineScope(): CoroutineScope = CoroutineScope(Dispatchers.IO)
+
 }
