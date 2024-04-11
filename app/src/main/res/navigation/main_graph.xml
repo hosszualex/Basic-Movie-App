@@ -38,6 +38,11 @@
         app:enterAnim="@anim/left_to_right_start"
         app:exitAnim="@anim/left_to_right_end"
         app:popEnterAnim="@anim/right_to_left_start"
-        app:popExitAnim="@anim/right_to_left_end" />
+        app:popExitAnim="@anim/right_to_left_end" >
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </action>
 
 </navigation>

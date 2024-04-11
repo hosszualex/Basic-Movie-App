@@ -9,6 +9,7 @@ data class Movie (
     val runtime: Int,
     val overview: String,
     val budget: Double,
+    val revenue: Double,
     val language: String,
     val genres: List<String>,
     var isFavourite: Boolean = false,

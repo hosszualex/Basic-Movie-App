@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -69,7 +70,8 @@ class HomeFragment: Fragment(), IOnMovieClickListener {
     }
 
     override fun onMovieClicked(id: Int) {
-        findNavController().navigate(R.id.navigateToMovieDetails)
+        val data = bundleOf(Pair("movieId", id))
+        findNavController().navigate(R.id.navigateToMovieDetails, data)
     }
 
     override fun onToggleFavorites(id: Int) {

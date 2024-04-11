@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,6 +42,9 @@ class MoviesViewModel @Inject constructor(
         initialValue = listOf(),
     )
 
+    fun getMovieForId(id: Int) = flow<Movie?> {
+        repository.movies.collect { movies -> emit(movies.firstOrNull { it.id == id }) }
+    }
 
     fun onFilterMovies(query: String) {
         querySearch.update { query }

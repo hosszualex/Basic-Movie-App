@@ -59,6 +59,8 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    implementation(libs.flexbox)
+
 
 
     testImplementation(libs.junit)

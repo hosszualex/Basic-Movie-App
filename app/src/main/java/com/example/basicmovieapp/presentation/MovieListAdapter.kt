@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.basicmovieapp.databinding.ListItemMovieBinding
 import com.example.basicmovieapp.domain.models.Movie
+import com.example.basicmovieapp.domain.util.TextFormatterUtil
 import com.example.basicmovieapp.domain.util.roundToHalf
-import java.text.SimpleDateFormat
 
 
 class MovieListAdapter(
@@ -17,7 +17,6 @@ class MovieListAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val yearOfReleaseFormat = SimpleDateFormat("yyyy")
 
     private val diffUtil = object : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -62,8 +61,7 @@ class MovieListAdapter(
                     listener.onMovieClicked(item.id)
                 }
                 textViewMovieTitle.text = item.title
-                textViewReleaseDate.text = yearOfReleaseFormat.parse(item.releaseDate)
-                    ?.let { yearOfReleaseFormat.format(it) }
+                textViewReleaseDate.text = TextFormatterUtil.getYearFromString(item.releaseDate)
                 ratingBarMovie.rating = item.rating.roundToHalf().toFloat()
                 imageButtonFavoriteIcon.isSelected = item.isFavourite
                 imageButtonFavoriteIcon.setOnClickListener {
