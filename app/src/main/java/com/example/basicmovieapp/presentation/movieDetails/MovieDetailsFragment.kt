@@ -16,7 +16,6 @@ import com.example.basicmovieapp.domain.util.roundToHalf
 import com.example.basicmovieapp.presentation.home.MoviesViewModel
 import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 
 class MovieDetailsFragment: Fragment() {
 
@@ -72,10 +71,10 @@ class MovieDetailsFragment: Fragment() {
             textViewOverviewContent.text = movie.overview
 
             binding.layoutKeyFactBudget.textViewTitle.text = "Budget"
-            binding.layoutKeyFactBudget.textViewFact.text = "$ ${TextFormatterUtil.formatRevenueAmount(movie.budget.toInt())}"
+            binding.layoutKeyFactBudget.textViewFact.text = "$ ${TextFormatterUtil.formatMoneyAmount(movie.budget.toInt())}"
 
             binding.layoutKeyFactRevenue.textViewTitle.text = "Revenue"
-            binding.layoutKeyFactRevenue.textViewFact.text = "$ ${TextFormatterUtil.formatRevenueAmount(movie.revenue.toInt())}"
+            binding.layoutKeyFactRevenue.textViewFact.text = "$ ${TextFormatterUtil.formatMoneyAmount(movie.revenue.toInt())}"
 
             binding.layoutKeyFactLanguage.textViewTitle.text = "Original Language"
             binding.layoutKeyFactLanguage.textViewFact.text = movie.language

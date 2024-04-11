@@ -13,7 +13,7 @@ object TextFormatterUtil {
         return ""
     }
 
-    fun formatRevenueAmount(value: Int): String {
+    fun formatMoneyAmount(value: Int): String {
         return decimalFormat.format(value).replace(",", ".")
     }
 
