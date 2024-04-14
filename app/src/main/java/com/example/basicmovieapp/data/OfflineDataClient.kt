@@ -13,18 +13,19 @@ class OfflineDataClient
     @Inject
     constructor(
         @ApplicationContext private val context: Context,
+        private val gson: Gson,
     ) : DataClient {
         override fun getMovies(): Flow<List<Movie>> =
             flow {
                 val jsonString = context.assets.open("movies.json").bufferedReader().use { it.readText() }
-                val response: List<Movie> = Gson().fromJson(jsonString, object : TypeToken<List<Movie?>?>() {}.type)
+                val response: List<Movie> = gson.fromJson(jsonString, object : TypeToken<List<Movie?>?>() {}.type)
                 emit(response)
             }
 
-        override fun getStaffPicks(): Flow<List<Movie>> =
+        override fun getStaffPickedMovies(): Flow<List<Movie>> =
             flow {
                 val jsonString = context.assets.open("staff_picks.json").bufferedReader().use { it.readText() }
-                val response: List<Movie> = Gson().fromJson(jsonString, object : TypeToken<List<Movie?>?>() {}.type)
+                val response: List<Movie> = gson.fromJson(jsonString, object : TypeToken<List<Movie?>?>() {}.type)
                 emit(response)
             }
     }

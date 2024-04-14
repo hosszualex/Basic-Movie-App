@@ -3,6 +3,7 @@ package com.example.basicmovieapp.domain.di
 import android.content.Context
 import com.example.basicmovieapp.data.DataClient
 import com.example.basicmovieapp.data.OfflineDataClient
+import com.google.gson.Gson
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -15,11 +16,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ProvidesModule {
     @Provides
-    @Singleton
-    fun providesMockService(
-        @ApplicationContext context: Context,
-    ): DataClient = OfflineDataClient(context)
+    fun provideGson(): Gson = Gson()
 
     @Provides
     fun providesCoroutineScope(): CoroutineScope = CoroutineScope(Dispatchers.IO)
+
+    @Provides
+    @Singleton
+    fun providesMockService(
+        @ApplicationContext context: Context,
+        gson: Gson,
+    ): DataClient = OfflineDataClient(context, gson)
 }

@@ -1,9 +1,8 @@
 package com.example.basicmovieapp.domain.repositories
 
-import android.util.Log
 import com.example.basicmovieapp.data.DataClient
 import com.example.basicmovieapp.domain.models.Movie
-import com.google.gson.JsonSyntaxException
+import com.example.basicmovieapp.domain.util.ErrorUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -48,7 +47,7 @@ class MovieRepositoryImpl
 
         private fun fetchMovies() {
             coroutineScope.launch {
-                client.getMovies().zip(client.getStaffPicks()) { movieListReponse, staffPicksResponse ->
+                client.getMovies().zip(client.getStaffPickedMovies()) { movieListReponse, staffPicksResponse ->
                     movieListReponse.map { movieResponse ->
                         movieResponse.apply {
                             isStaffPick =
@@ -57,19 +56,11 @@ class MovieRepositoryImpl
                     }
                 }
                     .catch { throwable ->
-                        Log.i("Repository Error: ", throwable.message.toString())
-                        _error.update { getParsedError(throwable) }
+                        _error.update { ErrorUtil.getParsedError(throwable) }
                     }
                     .collect { movies ->
                         _movies.update { movies }
                     }
-            }
-        }
-
-        private fun getParsedError(exception: Throwable): String {
-            return when (exception) {
-                is JsonSyntaxException -> "The JSON file(s) are in the wrong format."
-                else -> "An unknown error has occured. Please "
             }
         }
     }

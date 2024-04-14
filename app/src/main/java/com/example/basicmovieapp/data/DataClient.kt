@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface DataClient {
     fun getMovies(): Flow<List<Movie>>
 
-    fun getStaffPicks(): Flow<List<Movie>>
+    fun getStaffPickedMovies(): Flow<List<Movie>>
 }
