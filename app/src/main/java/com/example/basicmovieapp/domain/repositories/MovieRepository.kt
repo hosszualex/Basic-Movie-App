@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.StateFlow
 interface MovieRepository {
     val movies: StateFlow<List<Movie>>
 
+    val error: StateFlow<String>
+
     fun getMovieForId(id: Int): Flow<Movie?>
 
     fun toggleMovieFavorite(id: Int)

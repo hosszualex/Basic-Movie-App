@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.basicmovieapp.R
 import com.example.basicmovieapp.databinding.FragmentMovieSearchBinding
+import com.example.basicmovieapp.presentation.core.ErrorDialogFragment
 import com.example.basicmovieapp.presentation.core.IOnMovieClickListener
 import com.example.basicmovieapp.presentation.core.MovieListAdapter
 import com.example.basicmovieapp.presentation.core.MoviesViewModel
@@ -61,6 +62,12 @@ class MovieSearchFragment : Fragment(), IOnMovieClickListener {
         lifecycleScope.launch {
             viewModel.searchMovies.collect {
                 moviesAdapter.refreshData(it)
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.onError.collect {
+                val dialog = ErrorDialogFragment.newInstance(it)
+                dialog.show(childFragmentManager, "error_dialog")
             }
         }
     }

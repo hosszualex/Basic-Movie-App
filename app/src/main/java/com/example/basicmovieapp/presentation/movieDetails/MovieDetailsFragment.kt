@@ -13,6 +13,7 @@ import com.example.basicmovieapp.databinding.FragmentMovieDetailsBinding
 import com.example.basicmovieapp.domain.models.Movie
 import com.example.basicmovieapp.domain.util.TextFormatterUtil
 import com.example.basicmovieapp.domain.util.roundToHalf
+import com.example.basicmovieapp.presentation.core.ErrorDialogFragment
 import com.example.basicmovieapp.presentation.core.MoviesViewModel
 import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.coroutines.launch
@@ -52,6 +53,12 @@ class MovieDetailsFragment : Fragment() {
                 movie?.let { unwrappedMovie ->
                     setupMovieUi(unwrappedMovie)
                 }
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.onError.collect {
+                val dialog = ErrorDialogFragment.newInstance(it)
+                dialog.show(childFragmentManager, "error_dialog")
             }
         }
     }

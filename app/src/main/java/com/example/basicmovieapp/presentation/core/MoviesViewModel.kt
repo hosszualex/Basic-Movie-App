@@ -45,6 +45,15 @@ class MoviesViewModel
                 initialValue = listOf(),
             )
 
+        val onError: Flow<String> =
+            flow {
+                repository.error.collect {
+                    if (it.isNotBlank()) {
+                        emit(it)
+                    }
+                }
+            }
+
         fun getMovieForId(id: Int) = repository.getMovieForId(id)
 
         fun onFilterMovies(query: String) {

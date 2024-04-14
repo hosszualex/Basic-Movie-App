@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.basicmovieapp.R
 import com.example.basicmovieapp.databinding.FragmentHomeBinding
+import com.example.basicmovieapp.presentation.core.ErrorDialogFragment
 import com.example.basicmovieapp.presentation.core.IOnMovieClickListener
 import com.example.basicmovieapp.presentation.core.MovieListAdapter
 import com.example.basicmovieapp.presentation.core.MoviesViewModel
@@ -67,6 +68,13 @@ class HomeFragment : Fragment(), IOnMovieClickListener {
         lifecycleScope.launch {
             viewModel.staffPickedMovies.collect {
                 horizontalMoviesAdapter.refreshData(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.onError.collect {
+                val dialog = ErrorDialogFragment.newInstance(it)
+                dialog.show(childFragmentManager, "error_dialog")
             }
         }
     }

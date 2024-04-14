@@ -33,7 +33,7 @@ class MovieFavoritesAdapter(
 
     private val asyncListDiffer = AsyncListDiffer(this, diffUtil)
 
-    fun refreshData(data: List<Movie>)  {
+    fun refreshData(data: List<Movie>) {
         asyncListDiffer.submitList(data.map { it.copy() })
     }
 
