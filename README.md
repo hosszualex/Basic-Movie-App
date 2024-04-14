@@ -11,29 +11,30 @@ It serves a dual purpose: acting as a practical reference for the kind of applic
 can create, while also providing a platform to explore and implement new technologies.
 
 ## Features
+As a user, you are able to:
+  - search for a movie
+  - see details of a movie, such as: title, revenue, budget, etc.
+  - add a movie to your favorite list
+  - view your favorite movies
+  - able to see specially curated movies for your taste
+  - 
+## Screens
 
-A screen for crypto currencies which display the following data:
-
-- name
-- symbol
-- last trade price
-- relative change to yesterday, percentage wise
-- a search bar which filters from the existing crypto currencies
-
-The data updates every 5 seconds while the screen is displayed to the user.
-
-Network connectivity updates in the form of a snackbar.
+### Home Screen:
+![Home](home_screen.jpg)
+### Search Screen:
+![Search](search_screen.jpg)
+### Movie Detail Screen:
+![Detail](detail_screen.jpg)
 
 ## Teck Stack
 
+- Activity and Fragments with Views
+- Navigation Component
 - Kotlin
 - MVVM
 - Coroutines
 - Flows
-- Gson Serilization
+- Gson Serialization
 - HILT
 - JUnit4 for unit testing
-
-## Demo
-
-![Crypto Exchange Demo](crytpo_exchange.gif)
