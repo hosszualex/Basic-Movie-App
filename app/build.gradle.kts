@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -33,7 +33,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -58,13 +58,11 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.coil)
     implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
     implementation(libs.flexbox)
-
-
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
-    
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

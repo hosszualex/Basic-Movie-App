@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Basic Movie App"
 include(":app")
- 

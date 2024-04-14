@@ -1,6 +1,6 @@
 package com.example.basicmovieapp.domain.models
 
-data class Movie (
+data class Movie(
     val id: Int,
     val title: String,
     val rating: Double,
@@ -13,5 +13,5 @@ data class Movie (
     val language: String,
     val genres: List<String>,
     var isFavourite: Boolean = false,
-    var isStaffPick: Boolean = false
-    )
+    var isStaffPick: Boolean = false,
+)

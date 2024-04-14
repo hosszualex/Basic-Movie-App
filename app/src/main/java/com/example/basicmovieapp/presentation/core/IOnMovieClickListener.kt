@@ -1,4 +1,4 @@
-package com.example.basicmovieapp.presentation
+package com.example.basicmovieapp.presentation.core
 
 interface IOnMovieClickListener {
     fun onMovieClicked(id: Int)

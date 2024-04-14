@@ -14,7 +14,6 @@ import javax.inject.Singleton
 @dagger.Module
 @InstallIn(SingletonComponent::class)
 object ProvidesModule {
-
     @Provides
     @Singleton
     fun providesMockService(
@@ -23,5 +22,4 @@ object ProvidesModule {
 
     @Provides
     fun providesCoroutineScope(): CoroutineScope = CoroutineScope(Dispatchers.IO)
-
 }

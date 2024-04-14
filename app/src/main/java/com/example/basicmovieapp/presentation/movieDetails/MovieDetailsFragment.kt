@@ -13,28 +13,31 @@ import com.example.basicmovieapp.databinding.FragmentMovieDetailsBinding
 import com.example.basicmovieapp.domain.models.Movie
 import com.example.basicmovieapp.domain.util.TextFormatterUtil
 import com.example.basicmovieapp.domain.util.roundToHalf
-import com.example.basicmovieapp.presentation.home.MoviesViewModel
+import com.example.basicmovieapp.presentation.core.MoviesViewModel
 import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.coroutines.launch
 
-class MovieDetailsFragment: Fragment() {
-
+class MovieDetailsFragment : Fragment() {
     private var _binding: FragmentMovieDetailsBinding? = null
     private val binding: FragmentMovieDetailsBinding
         get() = _binding!!
     private val viewModel: MoviesViewModel by activityViewModels()
     private var currentMovieId: Int = 0
     private val genreAdapter = MovieGenreAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getInt("movieId")?.let { currentMovieId = it }
         binding.imageButtonBack.setOnClickListener { findNavController().popBackStack() }
@@ -54,7 +57,7 @@ class MovieDetailsFragment: Fragment() {
     }
 
     private fun setupMovieUi(movie: Movie) {
-        with (binding) {
+        with(binding) {
             imageViewPoster.load(movie.posterUrl) {
                 crossfade(true)
             }
@@ -65,7 +68,7 @@ class MovieDetailsFragment: Fragment() {
             ratingBarMovie.rating = movie.rating.roundToHalf().toFloat()
             textViewMovieTitle.text = "${movie.title} (${TextFormatterUtil.getYearFromString(movie.releaseDate)})"
             textViewReleaseDate.text = movie.releaseDate
-            textViewRuntime.text = "${movie.runtime/60}h ${movie.runtime%60}m"
+            textViewRuntime.text = "${movie.runtime / 60}h ${movie.runtime % 60}m"
             genreAdapter.submitGenres(movie.genres)
 
             textViewOverviewContent.text = movie.overview

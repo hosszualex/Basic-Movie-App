@@ -1,17 +1,12 @@
 package com.example.basicmovieapp.presentation
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.basicmovieapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : FragmentActivity() {
-
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 

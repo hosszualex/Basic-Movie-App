@@ -4,4 +4,4 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class BasicMovieApp: Application()
+class BasicMovieApp : Application()

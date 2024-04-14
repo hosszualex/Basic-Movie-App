@@ -12,5 +12,4 @@ import dagger.hilt.components.SingletonComponent
 interface BindsModule {
     @Binds
     fun bindsMovieRepository(movieRepository: MovieRepositoryImpl): MovieRepository
-
 }

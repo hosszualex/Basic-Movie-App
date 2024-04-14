@@ -11,15 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.basicmovieapp.R
 import com.example.basicmovieapp.databinding.FragmentHomeBinding
-import com.example.basicmovieapp.presentation.MovieListAdapter
-import com.example.basicmovieapp.presentation.IOnMovieClickListener
+import com.example.basicmovieapp.presentation.core.IOnMovieClickListener
+import com.example.basicmovieapp.presentation.core.MovieListAdapter
+import com.example.basicmovieapp.presentation.core.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
-class HomeFragment: Fragment(), IOnMovieClickListener {
-
+class HomeFragment : Fragment(), IOnMovieClickListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
         get() = _binding!!
@@ -31,13 +30,16 @@ class HomeFragment: Fragment(), IOnMovieClickListener {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         favoritesAdapter = MovieFavoritesAdapter(this)
         horizontalMoviesAdapter = MovieListAdapter(this)

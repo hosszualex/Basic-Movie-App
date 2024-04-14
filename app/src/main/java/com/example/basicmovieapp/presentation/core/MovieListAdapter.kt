@@ -1,4 +1,4 @@
-package com.example.basicmovieapp.presentation
+package com.example.basicmovieapp.presentation.core
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,22 +11,26 @@ import com.example.basicmovieapp.domain.models.Movie
 import com.example.basicmovieapp.domain.util.TextFormatterUtil
 import com.example.basicmovieapp.domain.util.roundToHalf
 
-
 class MovieListAdapter(
-    private val listener: IOnMovieClickListener
+    private val listener: IOnMovieClickListener,
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val diffUtil =
+        object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(
+                oldItem: Movie,
+                newItem: Movie,
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-
-    private val diffUtil = object : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem.id == newItem.id
+            override fun areContentsTheSame(
+                oldItem: Movie,
+                newItem: Movie,
+            ): Boolean {
+                return oldItem == newItem
+            }
         }
-
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem == newItem
-        }
-    }
 
     private val asyncListDiffer = AsyncListDiffer(this, diffUtil)
 
@@ -34,21 +38,25 @@ class MovieListAdapter(
         asyncListDiffer.submitList(data.map { it.copy() })
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerView.ViewHolder {
         return StaffPickMovieViewHolder(
             ListItemMovieBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false,
+            ),
         )
     }
 
-
     override fun getItemCount(): Int = asyncListDiffer.currentList.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
-        (holder as StaffPickMovieViewHolder).bindView(asyncListDiffer.currentList[position])
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+    ) = (holder as StaffPickMovieViewHolder).bindView(asyncListDiffer.currentList[position])
 
     inner class StaffPickMovieViewHolder(private val binding: ListItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {

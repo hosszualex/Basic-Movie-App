@@ -12,39 +12,43 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.basicmovieapp.R
 import com.example.basicmovieapp.databinding.FragmentMovieSearchBinding
-import com.example.basicmovieapp.presentation.IOnMovieClickListener
-import com.example.basicmovieapp.presentation.home.MoviesViewModel
-import com.example.basicmovieapp.presentation.MovieListAdapter
+import com.example.basicmovieapp.presentation.core.IOnMovieClickListener
+import com.example.basicmovieapp.presentation.core.MovieListAdapter
+import com.example.basicmovieapp.presentation.core.MoviesViewModel
 import kotlinx.coroutines.launch
 
-class MovieSearchFragment: Fragment(), IOnMovieClickListener {
-
+class MovieSearchFragment : Fragment(), IOnMovieClickListener {
     private val viewModel: MoviesViewModel by activityViewModels()
     private var _binding: FragmentMovieSearchBinding? = null
     private val binding: FragmentMovieSearchBinding
         get() = _binding!!
 
     private lateinit var moviesAdapter: MovieListAdapter
-    private val movieSearchQueryListener = object : SearchView.OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String?): Boolean {
-            return false
-        }
+    private val movieSearchQueryListener =
+        object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
-        override fun onQueryTextChange(newText: String?): Boolean {
-            newText?.let { viewModel.onFilterMovies(newText) }
-            return true
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { viewModel.onFilterMovies(newText) }
+                return true
+            }
         }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentMovieSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         moviesAdapter = MovieListAdapter(this)
         binding.recyclerViewMovies.adapter = moviesAdapter

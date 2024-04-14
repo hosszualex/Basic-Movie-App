@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat
 object TextFormatterUtil {
     private val yearOfReleaseFormat = SimpleDateFormat("yyyy")
     private val decimalFormat = DecimalFormat("#,###")
+
     fun getYearFromString(date: String): String {
         yearOfReleaseFormat.parse(date)?.let {
             return yearOfReleaseFormat.format(it)
@@ -16,5 +17,4 @@ object TextFormatterUtil {
     fun formatMoneyAmount(value: Int): String {
         return decimalFormat.format(value).replace(",", ".")
     }
-
 }
