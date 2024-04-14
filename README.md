@@ -17,7 +17,7 @@ As a user, you are able to:
   - add a movie to your favorite list
   - view your favorite movies
   - able to see specially curated movies for your taste
-  - 
+
 ## Screens
 
 ### Home Screen:
