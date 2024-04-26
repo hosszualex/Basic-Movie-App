@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
@@ -22,14 +23,10 @@ class MoviesViewModel
         private val repository: MovieRepository,
     ) : ViewModel() {
         val favoriteMovies: Flow<List<Movie>> =
-            flow {
-                repository.movies.collect { emit(it.filter { it.isFavourite }) }
-            }
+            repository.movies.map { movies -> movies.filter { it.isFavourite } }
 
         val staffPickedMovies: Flow<List<Movie>> =
-            flow {
-                repository.movies.collect { emit(it.filter { it.isStaffPick }) }
-            }
+            repository.movies.map { movies -> movies.filter { it.isStaffPick } }
 
         private val querySearch = MutableStateFlow("")
         val searchMovies: StateFlow<List<Movie>> =
@@ -46,13 +43,7 @@ class MoviesViewModel
             )
 
         val onError: Flow<String> =
-            flow {
-                repository.error.collect {
-                    if (it.isNotBlank()) {
-                        emit(it)
-                    }
-                }
-            }
+            repository.error.map { it }
 
         fun getMovieForId(id: Int) = repository.getMovieForId(id)
 

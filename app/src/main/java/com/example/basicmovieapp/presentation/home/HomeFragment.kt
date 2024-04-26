@@ -73,6 +73,8 @@ class HomeFragment : Fragment(), IOnMovieClickListener {
 
         lifecycleScope.launch {
             viewModel.onError.collect {
+                if (it.isEmpty())
+                    return@collect
                 val dialog = ErrorDialogFragment.newInstance(it)
                 dialog.show(childFragmentManager, "error_dialog")
             }

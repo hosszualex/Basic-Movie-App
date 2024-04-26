@@ -12,6 +12,6 @@ data class Movie(
     val revenue: Double,
     val language: String,
     val genres: List<String>,
-    var isFavourite: Boolean = false,
-    var isStaffPick: Boolean = false,
+    val isFavourite: Boolean = false,
+    val isStaffPick: Boolean = false,
 )
